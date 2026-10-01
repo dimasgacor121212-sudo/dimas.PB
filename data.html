@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Formulir Data Siswa</title>
+<link rel="stylesheet" href="data.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap topin">
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#ff8a1f"/><path d="M32 14 8 26l24 12 24-12z" fill="#fff"/><path d="M18 33v10c0 4 7 8 14 8s14-4 14-8V33l-14 7z" fill="#fff" opacity=".85"/><path d="M54 27v16" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+    <div>
+      <h1>Formulir Data Siswa</h1>
+      <p>Isi, simpan, dan kelola data siswa. Data tersimpan di perangkat ini dan bisa dibuka di Microsoft Excel.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="stats" id="stats" aria-label="Ringkasan"></section>
+
+  <section class="card" id="formCard">
+    <div class="card-head"><h2 id="formTitle">Tambah siswa baru</h2><span class="hint">Tanda <b class="req">*</b> wajib diisi</span></div>
+    <form id="siswaForm" novalidate>
+      <fieldset>
+        <legend>1. Data pribadi</legend>
+        <div class="photo">
+          <div class="pv" id="pv">Foto</div>
+          <div>
+            <label for="foto">Foto siswa (opsional)</label>
+            <input id="foto" type="file" accept="image/*">
+            <button type="button" id="rmFoto" class="btn ghost sm">Hapus foto</button>
+          </div>
+        </div>
+        <div class="grid" data-sec="pribadi"></div>
+      </fieldset>
+      <fieldset><legend>2. Kontak dan alamat</legend><div class="grid" data-sec="kontak"></div></fieldset>
+      <fieldset><legend>3. Data sekolah</legend><div class="grid" data-sec="sekolah"></div></fieldset>
+      <fieldset><legend>4. Orang tua / wali</legend><div class="grid" data-sec="ortu"></div></fieldset>
+      <fieldset><legend>5. Kesehatan</legend><div class="grid" data-sec="sehat"></div></fieldset>
+      <div class="actions">
+        <button class="btn" type="submit" id="saveBtn">Simpan data</button>
+        <button class="btn ghost" type="button" id="resetBtn">Kosongkan form</button>
+        <button class="btn ghost" type="button" id="cancelEdit" hidden>Batal ubah</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card" id="tableCard">
+    <div class="card-head"><h2>Review data siswa</h2><span class="hint" id="count"></span></div>
+    <div class="toolbar">
+      <input id="q" type="search" placeholder="Cari nama, NIS, kelas, kota..." aria-label="Cari">
+      <select id="fKelas" aria-label="Filter kelas"></select>
+      <div class="btns">
+        <button class="btn sm" id="xlsxBtn">Unduh Excel (.xlsx)</button>
+        <button class="btn ghost sm" id="csvBtn">Unduh CSV</button>
+        <button class="btn ghost sm" id="impBtn">Impor Excel/CSV</button>
+        <button class="btn ghost sm" id="linkBtn">Hubungkan file Excel</button>
+        <button class="btn ghost sm" id="printBtn">Cetak</button>
+        <button class="btn danger sm" id="clearBtn">Hapus semua</button>
+      </div>
+    </div>
+    <p class="status" id="status" role="status"></p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>No</th><th>Foto</th><th>NIS</th><th>Nama lengkap</th><th>JK</th><th>Tempat, tanggal lahir</th><th>Kelas</th><th>Jurusan</th><th>No. HP</th><th>Status</th><th class="noprint">Aksi</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p class="empty" id="empty">Belum ada data. Isi formulir di atas lalu klik Simpan data.</p>
+  </section>
+</main>
+
+<dialog id="detailDlg"></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="importFile" accept=".xlsx,.csv,text/csv" hidden>
+<script src="data.js"></script>
+</body>
+</html>
